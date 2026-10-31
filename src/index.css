@@ -1,0 +1,40 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
+}
+
+:focus-visible {
+  outline: 3px solid #00C2FF;
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+.svg-spin {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: svg-spin 1.4s linear infinite;
+}
+
+@keyframes svg-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
