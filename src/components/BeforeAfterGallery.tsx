@@ -1,68 +1,30 @@
 import { useState } from 'react';
 import SectionHeading from '@/components/SectionHeading';
-
-interface Photo {
-  src: string;
-  alt: string;
-}
+import CarIllustration from '@/components/CarIllustration';
 
 interface Comparison {
   id: string;
   caption: string;
-  before: Photo;
-  after: Photo;
+  color: string;
 }
 
 const COMPARISONS: Comparison[] = [
-  {
-    id: 'negro',
-    caption: 'Auto negro · antes y después',
-    before: {
-      src: 'https://images.pexels.com/photos/13430757/pexels-photo-13430757.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
-      alt: 'Auto negro cubierto de polvo y hojas, antes del lavado',
-    },
-    after: {
-      src: 'https://images.pexels.com/photos/11139416/pexels-photo-11139416.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
-      alt: '',
-    },
-  },
-  {
-    id: 'clasico',
-    caption: 'Auto clásico · antes y después',
-    before: {
-      src: 'https://images.pexels.com/photos/12953619/pexels-photo-12953619.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
-      alt: 'Auto clásico beige cubierto de polvo, antes del lavado',
-    },
-    after: {
-      src: 'https://images.pexels.com/photos/27670977/pexels-photo-27670977.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
-      alt: '',
-    },
-  },
+  { id: 'plata', caption: 'Mismo auto plata · antes y después', color: '#7C8CA8' },
+  { id: 'azul', caption: 'Mismo auto azul · antes y después', color: '#2F7BFF' },
 ];
 
-function BeforeAfterSlider({ caption, before, after }: Omit<Comparison, 'id'>) {
+function BeforeAfterSlider({ caption, color }: Omit<Comparison, 'id'>) {
   const [position, setPosition] = useState(50);
 
   return (
     <figure>
-      <div className="group relative aspect-[4/3] overflow-hidden rounded-3xl border border-white/10 bg-night-800 select-none md:aspect-[16/10]">
-        <img
-          src={after.src}
-          alt={after.alt}
-          draggable={false}
-          loading="lazy"
-          decoding="async"
-          className="absolute inset-0 h-full w-full object-cover"
-        />
-        <img
-          src={before.src}
-          alt={before.alt}
-          draggable={false}
-          loading="lazy"
-          decoding="async"
-          className="absolute inset-0 h-full w-full object-cover"
-          style={{ clipPath: `inset(0 ${100 - position}% 0 0)` }}
-        />
+      <div className="group relative aspect-[16/10] overflow-hidden rounded-3xl border border-white/10 bg-night-800 select-none">
+        <div className="absolute inset-0 p-6 sm:p-8">
+          <CarIllustration color={color} />
+        </div>
+        <div className="absolute inset-0 p-6 sm:p-8" style={{ clipPath: `inset(0 ${100 - position}% 0 0)` }}>
+          <CarIllustration color={color} dirty />
+        </div>
 
         <div
           aria-hidden="true"
@@ -103,11 +65,11 @@ export default function BeforeAfterGallery() {
         <SectionHeading
           eyebrow="Antes y después"
           title="Mira la diferencia"
-          description="Desliza la línea en cada foto para comparar el auto sucio con el resultado final."
+          description="Desliza la línea en cada auto para comparar cómo queda después del lavado."
         />
         <div className="mt-12 grid gap-8 md:grid-cols-2">
           {COMPARISONS.map((item) => (
-            <BeforeAfterSlider key={item.id} caption={item.caption} before={item.before} after={item.after} />
+            <BeforeAfterSlider key={item.id} caption={item.caption} color={item.color} />
           ))}
         </div>
       </div>
