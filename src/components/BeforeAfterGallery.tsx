@@ -1,62 +1,29 @@
-import { useState } from 'react';
 import SectionHeading from '@/components/SectionHeading';
-import CarIllustration from '@/components/CarIllustration';
 
 interface Comparison {
-  id: string;
+  src: string;
+  alt: string;
   caption: string;
-  color: string;
+  width: number;
+  height: number;
 }
 
 const COMPARISONS: Comparison[] = [
-  { id: 'plata', caption: 'Mismo auto plata · antes y después', color: '#7C8CA8' },
-  { id: 'azul', caption: 'Mismo auto azul · antes y después', color: '#2F7BFF' },
+  {
+    src: '/images/antes-despues-lateral.webp',
+    alt: 'Auto plateado de perfil: la mitad izquierda cubierta de lodo y la derecha limpia y brillante',
+    caption: 'Lateral · lodo y brillo',
+    width: 260,
+    height: 260,
+  },
+  {
+    src: '/images/antes-despues-frente.jpeg',
+    alt: 'Auto azul de frente: la mitad izquierda cubierta de lodo y la derecha limpia y brillante',
+    caption: 'Frente · lodo y brillo',
+    width: 260,
+    height: 260,
+  },
 ];
-
-function BeforeAfterSlider({ caption, color }: Omit<Comparison, 'id'>) {
-  const [position, setPosition] = useState(50);
-
-  return (
-    <figure>
-      <div className="group relative aspect-[16/10] overflow-hidden rounded-3xl border border-white/10 bg-night-800 select-none">
-        <div className="absolute inset-0 p-6 sm:p-8">
-          <CarIllustration color={color} />
-        </div>
-        <div className="absolute inset-0 p-6 sm:p-8" style={{ clipPath: `inset(0 ${100 - position}% 0 0)` }}>
-          <CarIllustration color={color} dirty />
-        </div>
-
-        <div
-          aria-hidden="true"
-          className="absolute inset-y-0 w-0.5 bg-white shadow-[0_0_12px_rgba(255,255,255,0.7)]"
-          style={{ left: `${position}%` }}
-        >
-          <span className="absolute top-1/2 left-1/2 flex h-11 w-11 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-aqua text-night shadow-lg shadow-black/40 transition-transform group-hover:scale-110">
-            <span className="text-sm font-bold">&#8644;</span>
-          </span>
-        </div>
-
-        <span className="absolute left-4 top-4 rounded-full bg-night/80 px-3 py-1 text-xs font-bold uppercase tracking-wider text-white backdrop-blur">
-          Antes
-        </span>
-        <span className="absolute right-4 top-4 rounded-full bg-aqua px-3 py-1 text-xs font-bold uppercase tracking-wider text-night">
-          Después
-        </span>
-
-        <input
-          type="range"
-          min={0}
-          max={100}
-          value={position}
-          onChange={(e) => setPosition(Number(e.target.value))}
-          aria-label="Desliza para comparar antes y después"
-          className="absolute inset-0 h-full w-full cursor-ew-resize opacity-0"
-        />
-      </div>
-      <figcaption className="mt-4 text-center text-sm text-mist">{caption}</figcaption>
-    </figure>
-  );
-}
 
 export default function BeforeAfterGallery() {
   return (
@@ -65,11 +32,24 @@ export default function BeforeAfterGallery() {
         <SectionHeading
           eyebrow="Antes y después"
           title="Mira la diferencia"
-          description="Desliza la línea en cada auto para comparar cómo queda después del lavado."
+          description="El mismo auto, con la mitad sin lavar y la mitad después de nuestro servicio."
         />
         <div className="mt-12 grid gap-8 md:grid-cols-2">
           {COMPARISONS.map((item) => (
-            <BeforeAfterSlider key={item.id} caption={item.caption} color={item.color} />
+            <figure key={item.src} className="group">
+              <div className="flex aspect-square items-center justify-center overflow-hidden rounded-3xl border border-white/10 bg-white p-6 transition-shadow duration-500 group-hover:shadow-2xl group-hover:shadow-aqua/20">
+                <img
+                  src={item.src}
+                  alt={item.alt}
+                  width={item.width}
+                  height={item.height}
+                  loading="lazy"
+                  decoding="async"
+                  className="max-h-full w-full object-contain transition-transform duration-700 ease-out group-hover:scale-105"
+                />
+              </div>
+              <figcaption className="mt-4 text-center text-sm text-mist">{item.caption}</figcaption>
+            </figure>
           ))}
         </div>
       </div>
