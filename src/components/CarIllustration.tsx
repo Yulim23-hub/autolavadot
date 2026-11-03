@@ -72,13 +72,19 @@ export default function CarIllustration({
       )}
 
       {dirty && (
-        <g fill="#4A3F2E" opacity="0.5">
-          <ellipse cx="70" cy="150" rx="16" ry="9" />
-          <ellipse cx="200" cy="160" rx="22" ry="8" />
-          <ellipse cx="300" cy="150" rx="14" ry="10" />
-          <ellipse cx="410" cy="158" rx="20" ry="7" />
-          <ellipse cx="160" cy="98" rx="10" ry="6" />
-          <ellipse cx="260" cy="96" rx="7" ry="5" />
+        <g>
+          <path d="M30 150 Q120 140 240 146 T450 146 L450 178 L30 178 Z" fill="#5C4B36" opacity="0.55" />
+          <path d="M120 60 L210 60 L210 74 L120 74 Z" fill="#6B5A44" opacity="0.4" />
+          <g fill="#4A3F2E" opacity="0.7">
+            <ellipse cx="70" cy="132" rx="14" ry="8" />
+            <ellipse cx="200" cy="112" rx="18" ry="7" />
+            <ellipse cx="300" cy="134" rx="12" ry="9" />
+            <ellipse cx="410" cy="124" rx="16" ry="6" />
+            <ellipse cx="160" cy="92" rx="9" ry="5" />
+            <ellipse cx="262" cy="84" rx="7" ry="5" />
+          </g>
+          <path d="M96 166 L110 190 L118 166 Z" fill="#5C4B36" opacity="0.6" />
+          <path d="M260 170 L274 200 L284 170 Z" fill="#5C4B36" opacity="0.6" />
         </g>
       )}
 
