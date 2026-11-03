@@ -4,6 +4,7 @@ import Services from '@/components/Services';
 import PriceCalculator from '@/components/PriceCalculator';
 import BookingForm from '@/components/BookingForm';
 import BeforeAfterGallery from '@/components/BeforeAfterGallery';
+import WorkPhotos from '@/components/WorkPhotos';
 import Reviews from '@/components/Reviews';
 import Promotions from '@/components/Promotions';
 import Faq from '@/components/Faq';
@@ -27,6 +28,7 @@ function App() {
         <PriceCalculator />
         <BookingForm />
         <BeforeAfterGallery />
+        <WorkPhotos />
         <Reviews />
         <Promotions />
         <Faq />
